@@ -24,7 +24,12 @@ export function NoticeBar() {
   if (typeof notices === 'string') {
     notices = JSON.parse(notices)
   }
-  if (!notices || notices?.length === 0) {
+  if (
+    !notices ||
+    notices === false ||
+    notices === 'false' ||
+    notices?.length === 0
+  ) {
     return <></>
   }
 

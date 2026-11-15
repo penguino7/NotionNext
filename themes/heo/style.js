@@ -54,6 +54,60 @@ const Style = () => {
         --heo-color-text-secondary: var(--heo-color-text-secondary-light);
         background-color: var(--heo-color-bg);
         color: var(--heo-color-text);
+        font-family: 'Source Serif 4', 'Source Serif Pro', source-serif-pro, Georgia, Cambria, 'Times New Roman', Times, serif;
+      }
+
+      @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+      #theme-heo article p,
+      #theme-heo article li,
+      #theme-heo .notion-text,
+      #theme-heo .notion-list,
+      #theme-heo .notion-list li,
+      #theme-heo .notion-bulleted_list_item,
+      #theme-heo .notion-numbered_list_item,
+      #theme-heo .notion-page-content p {
+        font-family: 'Source Serif 4', 'Source Serif Pro', source-serif-pro, Georgia, Cambria, 'Times New Roman', Times, serif !important;
+        font-size: 20px !important;
+        line-height: 32px !important;
+        letter-spacing: -0.003em !important;
+      }
+
+      .dark #theme-heo article p,
+      .dark #theme-heo article li,
+      .dark #theme-heo .notion-text,
+      .dark #theme-heo .notion-list li,
+      .dark #theme-heo .notion-bulleted_list_item,
+      .dark #theme-heo .notion-numbered_list_item,
+      .dark #theme-heo .notion-page-content p {
+        color: #E5E5E5 !important;
+      }
+
+      html:not(.dark) #theme-heo article p,
+      html:not(.dark) #theme-heo article li,
+      html:not(.dark) #theme-heo .notion-text,
+      html:not(.dark) #theme-heo .notion-list li,
+      html:not(.dark) #theme-heo .notion-bulleted_list_item,
+      html:not(.dark) #theme-heo .notion-numbered_list_item,
+      html:not(.dark) #theme-heo .notion-page-content p {
+        color: #242424 !important;
+      }
+
+      .dark #theme-heo .notion-h1, .dark #theme-heo h1,
+      .dark #theme-heo .notion-h2, .dark #theme-heo h2,
+      .dark #theme-heo .notion-h3, .dark #theme-heo h3 {
+        color: #FFFFFF !important;
+      }
+
+      html:not(.dark) #theme-heo .notion-h1, html:not(.dark) #theme-heo h1,
+      html:not(.dark) #theme-heo .notion-h2, html:not(.dark) #theme-heo h2,
+      html:not(.dark) #theme-heo .notion-h3, html:not(.dark) #theme-heo h3 {
+        color: #1a1a1a !important;
+      }
+
+      #theme-heo .notion-code, #theme-heo pre, #theme-heo code {
+        font-family: 'JetBrains Mono', Consolas, Monaco, monospace !important;
+        font-size: 15px !important;
       }
 
       .dark #theme-heo {

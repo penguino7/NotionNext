@@ -16,7 +16,6 @@ import CONFIG from '../config'
  * @returns
  */
 const Hero = props => {
-  const HEO_HERO_REVERSE = siteConfig('HEO_HERO_REVERSE', false, CONFIG)
   return (
     <div
       id='hero-wrapper'
@@ -24,16 +23,9 @@ const Hero = props => {
       <div
         id='hero'
         style={{ zIndex: 1 }}
-        className={`${HEO_HERO_REVERSE ? 'xl:flex-row-reverse' : ''}
-           recent-post-top rounded-[12px] 2xl:px-5 recent-top-post-group max-w-[86rem] overflow-x-scroll w-full mx-auto flex-row flex-nowrap flex relative`}>
-        {/* 左侧banner组 */}
+        className='recent-post-top rounded-[12px] 2xl:px-5 recent-top-post-group max-w-[86rem] overflow-x-scroll w-full mx-auto flex-row flex-nowrap flex relative'>
+        {/* Banner组 full-width */}
         <BannerGroup {...props} />
-
-        {/* 中间留白 */}
-        <div className='px-1.5 h-full'></div>
-
-        {/* 右侧置顶文章组 */}
-        <TopGroup {...props} />
       </div>
     </div>
   )
@@ -45,10 +37,9 @@ const Hero = props => {
  */
 function BannerGroup(props) {
   return (
-    // 左侧英雄区
     <div
       id='bannerGroup'
-      className='flex flex-col justify-between flex-1 mr-2 max-w-[42rem]'>
+      className='flex flex-col justify-between w-full'>
       {/* 动图 */}
       <Banner {...props} />
       {/* 导航分类 */}
@@ -73,44 +64,13 @@ function Banner(props) {
     router.push(`${siteConfig('SUB_PATH', '')}/${randomPost?.slug}`)
   }
 
-  // 遮罩文字
-  const coverTitle = siteConfig('HEO_HERO_COVER_TITLE')
-
   return (
     <div
       id='banners'
       onClick={handleClickBanner}
-        className='hidden xl:flex xl:flex-col group h-full bg-[var(--heo-color-card)] dark:bg-[var(--heo-color-card-dark)] rounded-xl border dark:border-gray-700 mb-3 relative overflow-hidden'>
-      <div
-        id='banner-title'
-        className='z-10 flex flex-col absolute top-10 left-10'>
-        <div className='text-4xl font-bold mb-3  dark:text-white'>
-          {siteConfig('HEO_HERO_TITLE_1', null, CONFIG)}
-          <br />
-          {siteConfig('HEO_HERO_TITLE_2', null, CONFIG)}
-        </div>
-        <div className='text-xs text-gray-600  dark:text-gray-200'>
-          {siteConfig('HEO_HERO_TITLE_3', null, CONFIG)}
-        </div>
-      </div>
-
+      className='flex flex-col group h-[260px] bg-[var(--heo-color-card)] dark:bg-[var(--heo-color-card-dark)] rounded-xl border dark:border-gray-700 mb-3 relative overflow-hidden cursor-pointer'>
       {/* 斜向滚动的图标 */}
       <TagsGroupBar />
-
-      {/* 遮罩 */}
-      <div
-        id='banner-cover'
-        style={{ backdropFilter: 'blur(15px)' }}
-        className={
-          'z-20 rounded-xl overflow-hidden opacity-0 group-hover:opacity-100 duration-300 transition-all bg-[var(--heo-color-primary)] dark:bg-[var(--heo-color-accent)] dark:text-white cursor-pointer absolute w-full h-full top-0 flex justify-start items-center'
-        }>
-        <div className='ml-12 -translate-x-32 group-hover:translate-x-0 duration-300 transition-all ease-in'>
-          <div className='text-7xl text-white font-extrabold'>{coverTitle}</div>
-          <div className='-ml-3 text-gray-300'>
-            <ArrowSmallRight className={'w-24 h-24 stroke-2'} />
-          </div>
-        </div>
-      </div>
     </div>
   )
 }
@@ -122,10 +82,10 @@ function Banner(props) {
 function TagsGroupBar() {
   let groupIcons = siteConfig('HEO_GROUP_ICONS', null, CONFIG)
   if (groupIcons) {
-    groupIcons = groupIcons.concat(groupIcons)
+    groupIcons = groupIcons.concat(groupIcons).concat(groupIcons)
   }
   return (
-    <div className='tags-group-all flex -rotate-[30deg] h-full'>
+    <div className='tags-group-all flex -rotate-[30deg] h-full w-[160%]'>
       <div className='tags-group-wrapper flex flex-nowrap absolute top-16'>
         {groupIcons?.map((g, index) => {
           return (
@@ -175,39 +135,38 @@ function GroupMenu() {
   const title_3 = siteConfig('HEO_HERO_CATEGORY_3', {}, CONFIG)?.title || ''
 
   return (
-    <div className='h-[165px] select-none xl:h-20 flex flex-col justify-between xl:space-y-0 xl:flex-row w-28 lg:w-48 xl:w-full xl:flex-nowrap xl:space-x-3'>
+    <div className='select-none h-20 flex flex-row w-full space-x-3'>
       <SmartLink
         href={url_1}
-        className='group relative overflow-hidden bg-[var(--heo-color-primary)] flex h-20 justify-start items-center text-[var(--heo-color-primary-text)] rounded-xl xl:hover:w-1/2 xl:w-1/3 transition-all duration-500 ease-in'>
-        <div className='font-bold lg:text-lg  pl-5 relative -mt-2'>
+        className='group relative overflow-hidden bg-[var(--heo-color-primary)] flex h-20 justify-start items-center text-[var(--heo-color-primary-text)] rounded-xl hover:w-1/2 w-1/3 transition-all duration-500 ease-in'>
+        <div className='font-bold lg:text-lg pl-5 relative -mt-2'>
           {title_1}
           <span className='absolute -bottom-0.5 left-5 w-5 h-0.5 bg-white rounded-full'></span>
         </div>
-        <div className='hidden lg:block absolute right-6  duration-700 ease-in-out transition-all scale-[2] translate-y-6 rotate-12 opacity-20 group-hover:opacity-80 group-hover:scale-100 group-hover:translate-y-0 group-hover:rotate-0'>
+        <div className='hidden lg:block absolute right-6 duration-700 ease-in-out transition-all scale-[2] translate-y-6 rotate-12 opacity-20 group-hover:opacity-80 group-hover:scale-100 group-hover:translate-y-0 group-hover:rotate-0'>
           <i className='fa-solid fa-star text-4xl'></i>
         </div>
       </SmartLink>
       <SmartLink
         href={url_2}
-        className='group relative overflow-hidden bg-gradient-to-r from-red-500 to-yellow-500 flex h-20 justify-start items-center text-white rounded-xl xl:hover:w-1/2 xl:w-1/3 transition-all duration-500 ease-in'>
+        className='group relative overflow-hidden bg-gradient-to-r from-red-500 to-yellow-500 flex h-20 justify-start items-center text-white rounded-xl hover:w-1/2 w-1/3 transition-all duration-500 ease-in'>
         <div className='font-bold lg:text-lg pl-5 relative -mt-2'>
           {title_2}
           <span className='absolute -bottom-0.5 left-5 w-5 h-0.5 bg-white rounded-full'></span>
         </div>
-        <div className='hidden lg:block absolute right-6  duration-700 ease-in-out transition-all scale-[2] translate-y-6 rotate-12 opacity-20 group-hover:opacity-80 group-hover:scale-100 group-hover:translate-y-0 group-hover:rotate-0'>
+        <div className='hidden lg:block absolute right-6 duration-700 ease-in-out transition-all scale-[2] translate-y-6 rotate-12 opacity-20 group-hover:opacity-80 group-hover:scale-100 group-hover:translate-y-0 group-hover:rotate-0'>
           <i className='fa-solid fa-fire-flame-curved text-4xl'></i>
         </div>
       </SmartLink>
-      {/* 第三个标签在小屏上不显示 */}
       <SmartLink
         href={url_3}
-        className='group relative overflow-hidden bg-gradient-to-r from-teal-300 to-cyan-300 hidden h-20 xl:flex justify-start items-center text-white rounded-xl xl:hover:w-1/2 xl:w-1/3 transition-all duration-500 ease-in'>
+        className='group relative overflow-hidden bg-gradient-to-r from-teal-300 to-cyan-300 flex h-20 justify-start items-center text-white rounded-xl hover:w-1/2 w-1/3 transition-all duration-500 ease-in'>
         <div className='font-bold text-lg pl-5 relative -mt-2'>
           {title_3}
           <span className='absolute -bottom-0.5 left-5 w-5 h-0.5 bg-white rounded-full'></span>
         </div>
         <div className='absolute right-6 duration-700 ease-in-out transition-all scale-[2] translate-y-6 rotate-12 opacity-20 group-hover:opacity-80 group-hover:scale-100 group-hover:translate-y-0 group-hover:rotate-0'>
-          <i className='fa-solid fa-book-bookmark text-4xl '></i>
+          <i className='fa-solid fa-book-bookmark text-4xl'></i>
         </div>
       </SmartLink>
     </div>
