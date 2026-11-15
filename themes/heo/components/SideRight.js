@@ -67,8 +67,12 @@ export default function SideRight(props) {
           className={
             'bg-[var(--heo-color-card)] dark:bg-[var(--heo-color-card-dark)] dark:text-white hover:border-[var(--heo-color-border)] dark:hover:border-[var(--heo-color-border-dark)] duration-200'
           }>
-          <TagGroups tags={sortedTags} currentTag={currentTag} />
-          <hr className='mx-1 flex border-dashed relative my-4' />
+          {sortedTags.length > 0 && (
+            <>
+              <TagGroups tags={sortedTags} currentTag={currentTag} />
+              <hr className='mx-1 flex border-dashed relative my-4' />
+            </>
+          )}
           <AnalyticsCard {...props} />
         </Card>
       </div>

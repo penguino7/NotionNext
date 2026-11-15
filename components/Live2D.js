@@ -10,29 +10,29 @@ import { useEffect } from 'react'
  */
 export default function Live2D() {
   const { theme, switchTheme } = useGlobal()
-  const showPet = JSON.parse(siteConfig('WIDGET_PET'))
-  const petLink = siteConfig('WIDGET_PET_LINK')
+  const SUB_PATH = siteConfig('SUB_PATH', '')
+  const showPet = siteConfig('WIDGET_PET') === true || siteConfig('WIDGET_PET') === 'true' || siteConfig('WIDGET_PET') === 1
+  const petLink = siteConfig('WIDGET_PET_LINK') || `${SUB_PATH}/live2d/wanko/wanko.model.json`
   const petSwitchTheme = siteConfig('WIDGET_PET_SWITCH_THEME')
 
   useEffect(() => {
     if (showPet && !isMobile()) {
       Promise.all([
         loadExternalResource(
-          'https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/live2d.min.js',
+          `${SUB_PATH}/js/live2d.min.js`,
           'js'
         )
       ]).then(e => {
         if (typeof window?.loadlive2d !== 'undefined') {
-          // https://github.com/xiazeyu/live2d-widget-models
           try {
             loadlive2d('live2d', petLink)
           } catch (error) {
-            console.error('读取PET模型', error)
+            console.error('Lỗi tải mô hình Live2D Pet:', error)
           }
         }
       })
     }
-  }, [theme])
+  }, [theme, petLink, showPet])
 
   function handleClick() {
     if (petSwitchTheme) {
@@ -50,7 +50,7 @@ export default function Live2D() {
       width='280'
       height='250'
       onClick={handleClick}
-      className='cursor-grab'
+      className='cursor-grab mx-auto'
       onMouseDown={e => e.target.classList.add('cursor-grabbing')}
       onMouseUp={e => e.target.classList.remove('cursor-grabbing')}
     />
