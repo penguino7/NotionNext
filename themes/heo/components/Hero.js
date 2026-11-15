@@ -68,8 +68,8 @@ function Banner(props) {
     <div
       id='banners'
       onClick={handleClickBanner}
-      className='flex flex-col group h-[260px] bg-[var(--heo-color-card)] dark:bg-[var(--heo-color-card-dark)] rounded-xl border dark:border-gray-700 mb-3 relative overflow-hidden cursor-pointer'>
-      {/* 斜向滚动的图标 */}
+      className='flex flex-col group h-[250px] bg-[var(--heo-color-card)] dark:bg-[var(--heo-color-card-dark)] rounded-xl border dark:border-gray-700 mb-3 relative overflow-hidden cursor-pointer'>
+      {/* Dải icon công nghệ trôi vô tận toàn màn hình */}
       <TagsGroupBar />
     </div>
   )
@@ -77,46 +77,39 @@ function Banner(props) {
 
 /**
  * 图标滚动标签组
- * 英雄区左上角banner条中斜向滚动的图标
+ * Dải icon công nghệ marquee tràn đều toàn bộ chiều ngang banner
  */
 function TagsGroupBar() {
-  let groupIcons = siteConfig('HEO_GROUP_ICONS', null, CONFIG)
-  if (groupIcons) {
-    groupIcons = groupIcons.concat(groupIcons).concat(groupIcons)
-  }
+  const groupIcons = siteConfig('HEO_GROUP_ICONS', null, CONFIG) || []
+  const iconsList = [...groupIcons, ...groupIcons, ...groupIcons, ...groupIcons]
+
   return (
-    <div className='tags-group-all flex -rotate-[30deg] h-full w-[160%]'>
-      <div className='tags-group-wrapper flex flex-nowrap absolute top-16'>
-        {groupIcons?.map((g, index) => {
-          return (
-            <div key={index} className='tags-group-icon-pair ml-6 select-none'>
-              <div
-                style={{ background: g.color_1 }}
-                className={
-                  'tags-group-icon w-28 h-28 rounded-3xl flex items-center justify-center text-white text-lg font-bold shadow-md'
-                }>
-                <LazyImage
-                  priority={true}
-                  src={g.img_1}
-                  title={g.title_1}
-                  className='w-2/3 hidden xl:block'
-                />
-              </div>
-              <div
-                style={{ background: g.color_2 }}
-                className={
-                  'tags-group-icon  mt-5 w-28 h-28 rounded-3xl flex items-center justify-center text-white text-lg font-bold shadow-md'
-                }>
-                <LazyImage
-                  priority={true}
-                  src={g.img_2}
-                  title={g.title_2}
-                  className='w-2/3 hidden xl:block'
-                />
-              </div>
+    <div className='w-full h-full flex items-center justify-start overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]'>
+      <div className='tags-group-wrapper flex flex-nowrap select-none py-3'>
+        {iconsList.map((g, index) => (
+          <div key={index} className='flex flex-col space-y-3 mx-3 shrink-0'>
+            <div
+              style={{ background: g.color_1 }}
+              className='w-20 h-20 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-white shadow-md transition-transform hover:scale-110 duration-200 cursor-pointer'>
+              <LazyImage
+                priority={true}
+                src={g.img_1}
+                title={g.title_1}
+                className='w-3/5 object-contain'
+              />
             </div>
-          )
-        })}
+            <div
+              style={{ background: g.color_2 }}
+              className='w-20 h-20 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-white shadow-md transition-transform hover:scale-110 duration-200 cursor-pointer'>
+              <LazyImage
+                priority={true}
+                src={g.img_2}
+                title={g.title_2}
+                className='w-3/5 object-contain'
+              />
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   )

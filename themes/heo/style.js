@@ -236,7 +236,12 @@ const Style = () => {
 
       // 标签滚动动画
       .tags-group-wrapper {
-        animation: rowup 60s linear infinite;
+        animation: rowup 45s linear infinite;
+        will-change: transform;
+      }
+
+      .tags-group-wrapper:hover {
+        animation-play-state: paused;
       }
 
       @keyframes rowup {
