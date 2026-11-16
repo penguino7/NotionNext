@@ -87,28 +87,21 @@ export function InfoCard(props) {
 
   return (
     <Card className='wow fadeInUp bg-[var(--heo-color-primary)] dark:bg-[var(--heo-color-accent)] text-[var(--heo-color-primary-text)] flex flex-col w-72 overflow-hidden relative'>
-      {/* 1. Tên tác giả và Avatar */}
-      <div className='flex justify-between items-center'>
-        <h2 className='text-2xl md:text-3xl font-extrabold pr-2'>{siteConfig('AUTHOR')}</h2>
-        {/* 头像 */}
-        <div
-          className={`${
-            useBlurAvatar
-              ? 'absolute right-0 -mt-8 -mr-6 hover:opacity-0 hover:scale-150 blur'
-              : 'cursor-pointer'
-          } justify-center items-center flex dark:text-gray-100 transform transition-all duration-200 shrink-0`}>
+      {/* 1. Avatar to tròn căn giữa */}
+      <div className='flex justify-center items-center pt-2 pb-1'>
+        <div className='cursor-pointer group relative'>
           <LazyImage
             src={avatarSrc}
-            className='rounded-full object-cover w-[76px] h-[76px] border-2 border-white/60 shadow-lg hover:scale-105 transition-transform duration-200'
-            width={useBlurAvatar ? 100 : 76}
-            height={useBlurAvatar ? 100 : 76}
+            className='rounded-full object-cover w-28 h-28 border-4 border-white/50 shadow-xl group-hover:scale-105 transition-transform duration-300'
+            width={112}
+            height={112}
             alt={siteConfig('AUTHOR')}
           />
         </div>
       </div>
 
-      {/* 2. Hai nút biểu tượng (About & GitHub) */}
-      <div className='flex items-center gap-3 mt-3'>
+      {/* 2. Hai nút biểu tượng (About & GitHub) căn giữa */}
+      <div className='flex justify-center items-center gap-4 mt-3'>
         {url1 && (
           <div className='w-10 h-10 flex items-center justify-center bg-[var(--heo-color-primary-hover)] rounded-full transition-colors duration-200 dark:bg-[var(--heo-color-accent)] dark:hover:bg-black hover:bg-white hover:text-black dark:hover:text-white'>
             <SmartLink href={url1}>
@@ -132,8 +125,10 @@ export function InfoCard(props) {
         )}
       </div>
 
-      {/* 3. Dòng quote hài hước */}
-      <GreetingsWords />
+      {/* 3. Dòng quote hài hước căn giữa */}
+      <div className='w-full'>
+        <GreetingsWords />
+      </div>
 
       {/* 公告栏 */}
       <Announcement post={notice} style={{ color: 'white !important' }} />
@@ -188,7 +183,7 @@ function GreetingsWords() {
   return (
     <div
       onClick={handleChangeGreeting}
-      className='mt-3.5 select-none cursor-pointer py-2 px-3 bg-[var(--heo-color-primary-hover)] hover:bg-[var(--heo-color-card-muted)] hover:text-[var(--heo-color-text)] dark:bg-[var(--heo-color-accent)] dark:hover:text-white dark:hover:bg-black text-xs md:text-sm rounded-lg duration-200 transition-colors leading-relaxed font-medium break-words'>
+      className='mt-3.5 select-none cursor-pointer py-2.5 px-3 bg-[var(--heo-color-primary-hover)] hover:bg-[var(--heo-color-card-muted)] hover:text-[var(--heo-color-text)] dark:bg-[var(--heo-color-accent)] dark:hover:text-white dark:hover:bg-black text-xs md:text-sm rounded-lg duration-200 transition-colors leading-relaxed font-medium break-words text-center'>
       {greeting}
     </div>
   )

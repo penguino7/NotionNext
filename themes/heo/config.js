@@ -130,7 +130,7 @@ const CONFIG = {
     }
   ],
 
-  HEO_SOCIAL_CARD: true, // 是否显示右侧，点击加入社群按钮
+  HEO_SOCIAL_CARD: false, // 是否显示右侧，点击加入社群按钮
   HEO_SOCIAL_CARD_TITLE_1: 'Click Here',
   HEO_SOCIAL_CARD_TITLE_2: '',
   HEO_SOCIAL_CARD_TITLE_3: 'Nothing Here',
