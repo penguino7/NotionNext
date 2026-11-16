@@ -160,17 +160,17 @@ const Header = props => {
           {/* 左侧logo */}
           <Logo {...props} />
 
-          {/* 中间菜单 */}
+          {/* 中间/右侧菜单 */}
           <div
             id='nav-bar-swipe'
-            className={`hidden lg:flex flex-grow flex-col items-center justify-center h-full relative w-full`}>
+            className={`hidden lg:flex flex-grow flex-col items-end justify-center h-full relative`}>
             <div
-              className={`absolute transition-all duration-700 ${activeIndex === 0 ? 'opacity-100 mt-0' : '-mt-20 opacity-0 invisible'}`}>
+              className={`absolute right-3 transition-all duration-700 ${activeIndex === 0 ? 'opacity-100 mt-0 pointer-events-auto' : '-mt-20 opacity-0 invisible pointer-events-none'}`}>
               <MenuListTop {...props} />
             </div>
             <div
-              className={`absolute transition-all duration-700 ${activeIndex === 1 ? 'opacity-100 mb-0' : '-mb-20 opacity-0 invisible'}`}>
-              <h1 className='font-bold text-center text-light-400 dark:text-gray-400'>
+              className={`absolute right-3 transition-all duration-700 ${activeIndex === 1 ? 'opacity-100 mb-0 pointer-events-auto' : '-mb-20 opacity-0 invisible pointer-events-none'}`}>
+              <h1 className='font-bold text-right text-light-400 dark:text-gray-400'>
                 {siteConfig('AUTHOR') || siteConfig('TITLE')}{' '}
                 {siteConfig('BIO') && <>|</>} {siteConfig('BIO')}
               </h1>
@@ -178,7 +178,7 @@ const Header = props => {
           </div>
 
           {/* 右侧固定 */}
-          <div className='flex flex-shrink-0 justify-end items-center w-48'>
+          <div className='flex flex-shrink-0 justify-end items-center space-x-1'>
             <RandomPostButton {...props} />
             <SearchButton {...props} />
             {!JSON.parse(siteConfig('THEME_SWITCH')) && (
