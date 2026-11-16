@@ -26,8 +26,25 @@ const SocialButton = () => {
   const iconClass =
     'transform hover:scale-125 duration-150 dark:hover:text-[var(--heo-color-accent)] hover:text-[var(--heo-color-primary)]'
 
+  const hasSocial =
+    CONTACT_GITHUB ||
+    CONTACT_ORCID ||
+    CONTACT_CSDN ||
+    CONTACT_JUEJIN ||
+    CONTACT_TWITTER ||
+    CONTACT_TELEGRAM ||
+    CONTACT_LINKEDIN ||
+    CONTACT_WEIBO ||
+    CONTACT_INSTAGRAM ||
+    CONTACT_EMAIL ||
+    ENABLE_RSS ||
+    CONTACT_BILIBILI ||
+    CONTACT_YOUTUBE
+
+  if (!hasSocial) return null
+
   return (
-    <div className='w-full justify-center flex-wrap flex'>
+    <div className='w-full h-24 mb-4 justify-center flex-wrap flex'>
       <div className='space-x-12 text-3xl text-gray-600 dark:text-gray-300 '>
         {CONTACT_GITHUB && (
           <a

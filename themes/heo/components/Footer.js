@@ -22,11 +22,7 @@ const Footer = () => {
       />
 
       {/* 社交按钮 */}
-      <div className='w-full h-24'>
-        <SocialButton />
-      </div>
-
-      <br />
+      <SocialButton />
 
       {/* 底部页面信息 */}
       <div
