@@ -143,6 +143,25 @@ const Header = props => {
         .fade-in-up {
           animation: fade-in-up 0.3s ease-in-out;
         }
+
+        @keyframes header-marquee {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+
+        .header-marquee {
+          display: inline-flex;
+          animation: header-marquee 16s linear infinite;
+          will-change: transform;
+        }
+
+        .header-marquee:hover {
+          animation-play-state: paused;
+        }
       `}</style>
 
       {/* fixed时留白高度 */}
@@ -171,9 +190,34 @@ const Header = props => {
             </div>
             <div
               className={`absolute right-3 transition-all duration-700 ${activeIndex === 1 ? 'opacity-100 mb-0 pointer-events-auto' : '-mb-20 opacity-0 invisible pointer-events-none'}`}>
-              <h1 className='font-bold text-right text-light-400 dark:text-gray-400'>
-                {siteConfig('HEO_HEADER_SLOGAN', 'Giảm sức mạnh con tướng này giúp em', CONFIG)}
-              </h1>
+              <div
+                className='w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg overflow-hidden'
+                style={{
+                  maskImage:
+                    'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+                  WebkitMaskImage:
+                    'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)'
+                }}>
+                <div className='flex whitespace-nowrap header-marquee py-1 select-none cursor-default'>
+                  {[0, 1, 2, 3].map(i => (
+                    <span
+                      key={i}
+                      className='inline-flex items-center text-sm md:text-base font-semibold text-inherit mx-3'>
+                      <span>{siteConfig('HEO_HEADER_SLOGAN', 'Giảm sức mạnh con tướng này giúp em', CONFIG)}</span>
+                      <span className='ml-3 text-xs'>🎮</span>
+                    </span>
+                  ))}
+                  {[0, 1, 2, 3].map(i => (
+                    <span
+                      key={`dup-${i}`}
+                      aria-hidden='true'
+                      className='inline-flex items-center text-sm md:text-base font-semibold text-inherit mx-3'>
+                      <span>{siteConfig('HEO_HEADER_SLOGAN', 'Giảm sức mạnh con tướng này giúp em', CONFIG)}</span>
+                      <span className='ml-3 text-xs'>🎮</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
