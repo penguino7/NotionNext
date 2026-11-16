@@ -75,6 +75,16 @@ export function InfoCard(props) {
     isSlugPage,
     avatarBlurEnabled
   )
+
+  const rawAvatar = siteConfig('AVATAR') || siteInfo?.icon
+  const isImageIcon =
+    rawAvatar &&
+    typeof rawAvatar === 'string' &&
+    (rawAvatar.startsWith('http') ||
+      rawAvatar.startsWith('/') ||
+      rawAvatar.startsWith('data:'))
+  const avatarSrc = isImageIcon ? rawAvatar : '/avatar.png'
+
   return (
     <Card className='wow fadeInUp bg-[var(--heo-color-primary)] dark:bg-[var(--heo-color-accent)] text-[var(--heo-color-primary-text)] flex flex-col w-72 overflow-hidden relative'>
       {/* 1. Tên tác giả và Avatar */}
@@ -88,10 +98,10 @@ export function InfoCard(props) {
               : 'cursor-pointer'
           } justify-center items-center flex dark:text-gray-100 transform transition-all duration-200 shrink-0`}>
           <LazyImage
-            src={siteInfo?.icon}
-            className='rounded-full'
-            width={useBlurAvatar ? 100 : 36}
-            height={useBlurAvatar ? 100 : 36}
+            src={avatarSrc}
+            className='rounded-full object-cover border-2 border-white/40 shadow-md'
+            width={useBlurAvatar ? 100 : 44}
+            height={useBlurAvatar ? 100 : 44}
             alt={siteConfig('AUTHOR')}
           />
         </div>
