@@ -77,76 +77,56 @@ export function InfoCard(props) {
   )
   return (
     <Card className='wow fadeInUp bg-[var(--heo-color-primary)] dark:bg-[var(--heo-color-accent)] text-[var(--heo-color-primary-text)] flex flex-col w-72 overflow-hidden relative'>
-      {/* 信息卡牌第一行 */}
-      <div className='flex justify-between items-start gap-2'>
-        {/* 问候语 */}
-        <div className='flex-1'>
-          <GreetingsWords />
-        </div>
+      {/* 1. Tên tác giả và Avatar */}
+      <div className='flex justify-between items-center'>
+        <h2 className='text-3xl font-extrabold'>{siteConfig('AUTHOR')}</h2>
         {/* 头像 */}
         <div
           className={`${
             useBlurAvatar
               ? 'absolute right-0 -mt-8 -mr-6 hover:opacity-0 hover:scale-150 blur'
               : 'cursor-pointer'
-          } justify-center items-center flex dark:text-gray-100 transform transition-all duration-200 shrink-0 mt-0.5`}>
+          } justify-center items-center flex dark:text-gray-100 transform transition-all duration-200 shrink-0`}>
           <LazyImage
             src={siteInfo?.icon}
             className='rounded-full'
-            width={useBlurAvatar ? 100 : 28}
-            height={useBlurAvatar ? 100 : 28}
+            width={useBlurAvatar ? 100 : 36}
+            height={useBlurAvatar ? 100 : 36}
             alt={siteConfig('AUTHOR')}
           />
         </div>
       </div>
 
-      <h2 className='text-3xl font-extrabold mt-3'>{siteConfig('AUTHOR')}</h2>
+      {/* 2. Hai nút biểu tượng (About & GitHub) */}
+      <div className='flex items-center gap-3 mt-3'>
+        {url1 && (
+          <div className='w-10 h-10 flex items-center justify-center bg-[var(--heo-color-primary-hover)] rounded-full transition-colors duration-200 dark:bg-[var(--heo-color-accent)] dark:hover:bg-black hover:bg-white hover:text-black dark:hover:text-white'>
+            <SmartLink href={url1}>
+              <i className={icon1} />
+            </SmartLink>
+          </div>
+        )}
+        {url2 && (
+          <div className='w-10 h-10 flex items-center justify-center bg-[var(--heo-color-primary-hover)] rounded-full transition-colors duration-200 dark:bg-[var(--heo-color-accent)] dark:hover:bg-black hover:bg-white hover:text-black dark:hover:text-white'>
+            <SmartLink href={url2}>
+              <i className={icon2} />
+            </SmartLink>
+          </div>
+        )}
+        {orcidUrl && (
+          <div className='w-10 h-10 flex items-center justify-center bg-[var(--heo-color-primary-hover)] rounded-full transition-colors duration-200 dark:bg-[var(--heo-color-accent)] dark:hover:bg-black hover:bg-white hover:text-black dark:hover:text-white'>
+            <SmartLink href={orcidUrl} title='ORCID' aria-label='ORCID'>
+              <i className={orcidIcon} />
+            </SmartLink>
+          </div>
+        )}
+      </div>
+
+      {/* 3. Dòng quote hài hước */}
+      <GreetingsWords />
 
       {/* 公告栏 */}
       <Announcement post={notice} style={{ color: 'white !important' }} />
-
-      <div className='flex flex-wrap gap-3 justify-between'>
-        <div className='flex flex-wrap gap-3 hover:text-black dark:hover:text-white'>
-          {/* 社交按钮 */}
-          {url1 && (
-            <div className='w-10 text-center bg-[var(--heo-color-primary-hover)] p-2 rounded-full  transition-colors duration-200 dark:bg-[var(--heo-color-accent)] dark:hover:bg-black hover:bg-white'>
-              <SmartLink href={url1}>
-                <i className={icon1} />
-              </SmartLink>
-            </div>
-          )}
-          {url2 && (
-            <div className='bg-[var(--heo-color-primary-hover)] p-2 rounded-full w-10 items-center flex justify-center transition-colors duration-200 dark:bg-[var(--heo-color-accent)] dark:hover:bg-black hover:bg-white'>
-              <SmartLink href={url2}>
-                <i className={icon2} />
-              </SmartLink>
-            </div>
-          )}
-          {orcidUrl && (
-            <div className='bg-[var(--heo-color-primary-hover)] p-2 rounded-full w-10 items-center flex justify-center transition-colors duration-200 dark:bg-[var(--heo-color-accent)] dark:hover:bg-black hover:bg-white'>
-              <SmartLink href={orcidUrl} title='ORCID' aria-label='ORCID'>
-                <i className={orcidIcon} />
-              </SmartLink>
-            </div>
-          )}
-          {csdnUrl && (
-            <div className='bg-[var(--heo-color-primary-hover)] p-2 rounded-full w-10 items-center flex justify-center transition-colors duration-200 dark:bg-[var(--heo-color-accent)] dark:hover:bg-black hover:bg-white'>
-              <SmartLink href={csdnUrl} title='CSDN' aria-label='CSDN'>
-                <i className={csdnIcon} />
-              </SmartLink>
-            </div>
-          )}
-          {juejinUrl && (
-            <div className='bg-[var(--heo-color-primary-hover)] p-2 rounded-full w-10 items-center flex justify-center transition-colors duration-200 dark:bg-[var(--heo-color-accent)] dark:hover:bg-black hover:bg-white'>
-              <SmartLink href={juejinUrl} title='稀土掘金' aria-label='稀土掘金'>
-                <i className={juejinIcon} />
-              </SmartLink>
-            </div>
-          )}
-        </div>
-        {/* 第三个按钮 */}
-        <MoreButton />
-      </div>
     </Card>
   )
 }
@@ -185,20 +165,20 @@ function GreetingsWords() {
   const greetings = normalizeInfoCardGreetings(
     siteConfig('HEO_INFOCARD_GREETINGS', null, CONFIG)
   )
-  const [greeting, setGreeting] = useState(greetings[0])
-  if (greetings.length === 0) {
-    return null
-  }
+  const defaultQuote = 'Deadline tới đít vẫn còn lướt TikTok.'
+  const [greeting, setGreeting] = useState(greetings[0] || defaultQuote)
   // 每次点击，随机获取greetings中的一个
   const handleChangeGreeting = () => {
-    const randomIndex = Math.floor(Math.random() * greetings.length)
-    setGreeting(greetings[randomIndex])
+    if (greetings.length > 1) {
+      const randomIndex = Math.floor(Math.random() * greetings.length)
+      setGreeting(greetings[randomIndex])
+    }
   }
 
   return (
     <div
       onClick={handleChangeGreeting}
-      className='select-none cursor-pointer py-1.5 px-2.5 bg-[var(--heo-color-primary-hover)] hover:bg-[var(--heo-color-card-muted)] hover:text-[var(--heo-color-text)] dark:bg-[var(--heo-color-accent)] dark:hover:text-white dark:hover:bg-black text-xs md:text-sm rounded-lg duration-200 transition-colors leading-relaxed break-words'>
+      className='mt-3.5 select-none cursor-pointer py-2 px-3 bg-[var(--heo-color-primary-hover)] hover:bg-[var(--heo-color-card-muted)] hover:text-[var(--heo-color-text)] dark:bg-[var(--heo-color-accent)] dark:hover:text-white dark:hover:bg-black text-xs md:text-sm rounded-lg duration-200 transition-colors leading-relaxed font-medium break-words'>
       {greeting}
     </div>
   )

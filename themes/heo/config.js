@@ -56,7 +56,7 @@ const CONFIG = {
 
   // 右侧个人资料卡牌欢迎语，点击可自动切换
   HEO_INFOCARD_GREETINGS: [
-    'Xin chào, không biết bạn có tin vào duyên số không. Chứ mình thấy chúng ta hợp nhau từ cái nhìn đầu tiên trên màn hình rồi đấy'
+    'Deadline tới đít vẫn còn lướt TikTok.'
   ],
 
   // 个人资料底部按钮
