@@ -89,7 +89,7 @@ export function InfoCard(props) {
     <Card className='wow fadeInUp bg-[var(--heo-color-primary)] dark:bg-[var(--heo-color-accent)] text-[var(--heo-color-primary-text)] flex flex-col w-72 overflow-hidden relative'>
       {/* 1. Tên tác giả và Avatar */}
       <div className='flex justify-between items-center'>
-        <h2 className='text-3xl font-extrabold'>{siteConfig('AUTHOR')}</h2>
+        <h2 className='text-2xl md:text-3xl font-extrabold pr-2'>{siteConfig('AUTHOR')}</h2>
         {/* 头像 */}
         <div
           className={`${
@@ -99,9 +99,9 @@ export function InfoCard(props) {
           } justify-center items-center flex dark:text-gray-100 transform transition-all duration-200 shrink-0`}>
           <LazyImage
             src={avatarSrc}
-            className='rounded-full object-cover border-2 border-white/40 shadow-md'
-            width={useBlurAvatar ? 100 : 44}
-            height={useBlurAvatar ? 100 : 44}
+            className='rounded-full object-cover w-[76px] h-[76px] border-2 border-white/60 shadow-lg hover:scale-105 transition-transform duration-200'
+            width={useBlurAvatar ? 100 : 76}
+            height={useBlurAvatar ? 100 : 76}
             alt={siteConfig('AUTHOR')}
           />
         </div>
