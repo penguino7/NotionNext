@@ -88,20 +88,20 @@ export function InfoCard(props) {
   return (
     <Card className='wow fadeInUp bg-[var(--heo-color-primary)] dark:bg-[var(--heo-color-accent)] text-[var(--heo-color-primary-text)] flex flex-col w-72 overflow-hidden relative'>
       {/* 1. Avatar to tròn căn giữa */}
-      <div className='flex justify-center items-center pt-2 pb-1'>
+      <div className='flex justify-center items-center pt-4 pb-1'>
         <div className='cursor-pointer group relative'>
           <LazyImage
             src={avatarSrc}
-            className='rounded-full object-cover w-28 h-28 border-4 border-white/50 shadow-xl group-hover:scale-105 transition-transform duration-300'
-            width={112}
-            height={112}
+            className='rounded-full object-cover w-36 h-36 border-4 border-white/50 shadow-xl group-hover:scale-105 transition-transform duration-300'
+            width={144}
+            height={144}
             alt={siteConfig('AUTHOR')}
           />
         </div>
       </div>
 
       {/* 2. Hai nút biểu tượng (About & GitHub) căn giữa */}
-      <div className='flex justify-center items-center gap-4 mt-3'>
+      <div className='flex justify-center items-center gap-4 mt-4'>
         {url1 && (
           <div className='w-10 h-10 flex items-center justify-center bg-[var(--heo-color-primary-hover)] rounded-full transition-colors duration-200 dark:bg-[var(--heo-color-accent)] dark:hover:bg-black hover:bg-white hover:text-black dark:hover:text-white'>
             <SmartLink href={url1}>
@@ -183,7 +183,7 @@ function GreetingsWords() {
   return (
     <div
       onClick={handleChangeGreeting}
-      className='mt-3.5 select-none cursor-pointer py-2.5 px-3 bg-[var(--heo-color-primary-hover)] hover:bg-[var(--heo-color-card-muted)] hover:text-[var(--heo-color-text)] dark:bg-[var(--heo-color-accent)] dark:hover:text-white dark:hover:bg-black text-xs md:text-sm rounded-lg duration-200 transition-colors leading-relaxed font-medium break-words text-center'>
+      className='mt-5 select-none cursor-pointer py-3 px-3.5 bg-[var(--heo-color-primary-hover)] hover:bg-[var(--heo-color-card-muted)] hover:text-[var(--heo-color-text)] dark:bg-[var(--heo-color-accent)] dark:hover:text-white dark:hover:bg-black text-sm md:text-base rounded-xl duration-200 transition-colors leading-relaxed font-semibold break-words text-center'>
       {greeting}
     </div>
   )
