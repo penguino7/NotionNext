@@ -26,6 +26,9 @@ const CONFIG = {
   HEO_NOTICE_BAR: false,
   HEO_NOTICE_BAR_INTERVAL: 3000, // 多条通知的切换间隔，单位毫秒；非正数或无效值回退为 3000
 
+  // 顶部导航栏向下滚动时显示的标语
+  HEO_HEADER_SLOGAN: 'Giảm sức mạnh con tướng này giúp em',
+
   // 英雄区左右侧组件颠倒位置
   HEO_HERO_REVERSE: false,
   // 博客主体区左右侧组件颠倒位置

@@ -3,6 +3,7 @@ import { isBrowser } from '@/lib/utils'
 import throttle from 'lodash.throttle'
 import { useRouter } from 'next/router'
 import { useEffect, useMemo, useRef, useState } from 'react'
+import CONFIG from '../config'
 import DarkModeButton from './DarkModeButton'
 import Logo from './Logo'
 import { MenuListTop } from './MenuListTop'
@@ -171,8 +172,7 @@ const Header = props => {
             <div
               className={`absolute right-3 transition-all duration-700 ${activeIndex === 1 ? 'opacity-100 mb-0 pointer-events-auto' : '-mb-20 opacity-0 invisible pointer-events-none'}`}>
               <h1 className='font-bold text-right text-light-400 dark:text-gray-400'>
-                {siteConfig('AUTHOR') || siteConfig('TITLE')}{' '}
-                {siteConfig('BIO') && <>|</>} {siteConfig('BIO')}
+                {siteConfig('HEO_HEADER_SLOGAN', 'Giảm sức mạnh con tướng này giúp em', CONFIG)}
               </h1>
             </div>
           </div>
