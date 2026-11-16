@@ -78,16 +78,18 @@ export function InfoCard(props) {
   return (
     <Card className='wow fadeInUp bg-[var(--heo-color-primary)] dark:bg-[var(--heo-color-accent)] text-[var(--heo-color-primary-text)] flex flex-col w-72 overflow-hidden relative'>
       {/* 信息卡牌第一行 */}
-      <div className='flex justify-between'>
+      <div className='flex justify-between items-start gap-2'>
         {/* 问候语 */}
-        <GreetingsWords />
+        <div className='flex-1'>
+          <GreetingsWords />
+        </div>
         {/* 头像 */}
         <div
           className={`${
             useBlurAvatar
               ? 'absolute right-0 -mt-8 -mr-6 hover:opacity-0 hover:scale-150 blur'
               : 'cursor-pointer'
-          } justify-center items-center flex dark:text-gray-100 transform transition-all duration-200`}>
+          } justify-center items-center flex dark:text-gray-100 transform transition-all duration-200 shrink-0 mt-0.5`}>
           <LazyImage
             src={siteInfo?.icon}
             className='rounded-full'
@@ -196,7 +198,7 @@ function GreetingsWords() {
   return (
     <div
       onClick={handleChangeGreeting}
-      className=' select-none cursor-pointer py-1 px-2 bg-[var(--heo-color-primary-hover)] hover:bg-[var(--heo-color-card-muted)]  hover:text-[var(--heo-color-text)] dark:bg-[var(--heo-color-accent)] dark:hover:text-white dark:hover:bg-black text-sm rounded-lg  duration-200 transition-colors'>
+      className='select-none cursor-pointer py-1.5 px-2.5 bg-[var(--heo-color-primary-hover)] hover:bg-[var(--heo-color-card-muted)] hover:text-[var(--heo-color-text)] dark:bg-[var(--heo-color-accent)] dark:hover:text-white dark:hover:bg-black text-xs md:text-sm rounded-lg duration-200 transition-colors leading-relaxed break-words'>
       {greeting}
     </div>
   )
