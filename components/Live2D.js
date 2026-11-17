@@ -9,11 +9,10 @@ import { useEffect } from 'react'
  * @returns
  */
 export default function Live2D() {
-  const { theme, switchTheme } = useGlobal()
+  const { theme } = useGlobal()
   const SUB_PATH = siteConfig('SUB_PATH', '')
   const showPet = siteConfig('WIDGET_PET') === true || siteConfig('WIDGET_PET') === 'true' || siteConfig('WIDGET_PET') === 1
   const petLink = siteConfig('WIDGET_PET_LINK') || `${SUB_PATH}/live2d/wanko/wanko.model.json`
-  const petSwitchTheme = siteConfig('WIDGET_PET_SWITCH_THEME')
 
   useEffect(() => {
     if (showPet && !isMobile()) {
@@ -34,12 +33,6 @@ export default function Live2D() {
     }
   }, [theme, petLink, showPet])
 
-  function handleClick() {
-    if (petSwitchTheme) {
-      switchTheme()
-    }
-  }
-
   if (!showPet) {
     return <></>
   }
@@ -49,7 +42,6 @@ export default function Live2D() {
       id='live2d'
       width='280'
       height='250'
-      onClick={handleClick}
       className='cursor-grab mx-auto'
       onMouseDown={e => e.target.classList.add('cursor-grabbing')}
       onMouseUp={e => e.target.classList.remove('cursor-grabbing')}
