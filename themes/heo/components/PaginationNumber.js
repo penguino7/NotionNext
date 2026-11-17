@@ -1,8 +1,6 @@
-import { ChevronDoubleRight } from '@/components/HeroIcons'
 import { useGlobal } from '@/lib/global'
 import SmartLink from '@/components/SmartLink'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
 
 /**
  * 数字翻页插件
@@ -23,24 +21,6 @@ const PaginationNumber = ({ page, totalPage }) => {
     .replace(/\/$/, '')
     .replace('.html', '')
   const pages = generatePages(pagePrefix, page, currentPage, totalPage)
-
-  const [value, setValue] = useState('')
-
-  const handleInputChange = event => {
-    const newValue = event.target.value.replace(/[^0-9]/g, '')
-    setValue(newValue)
-  }
-
-  /**
-   * 调到指定页
-   */
-  const jumpToPage = () => {
-    if (value) {
-      router.push(
-        value === 1 ? `${pagePrefix}/` : `${pagePrefix}/page/${value}`
-      )
-    }
-  }
 
   return (
     <>
@@ -68,19 +48,6 @@ const PaginationNumber = ({ page, totalPage }) => {
         {/* 分页 */}
         <div className='flex items-center space-x-2'>
           {pages}
-
-          {/* 跳转页码 */}
-          <div className='bg-[var(--heo-color-card)] hover:bg-gray-100 dark:hover:bg-[var(--heo-color-accent)] dark:bg-[var(--heo-color-card-dark)] h-10 border dark:border-gray-600 flex justify-center items-center rounded-lg group hover:border-[var(--heo-color-border)] transition-all duration-200'>
-            <input
-              value={value}
-              className='w-0 group-hover:w-20 group-hover:px-3 transition-all duration-200 bg-gray-100 border-none outline-none h-full rounded-lg'
-              onInput={handleInputChange}></input>
-            <div
-              onClick={jumpToPage}
-              className='cursor-pointer hover:bg-[var(--heo-color-primary)] dark:bg-[var(--heo-color-card-dark)] dark:hover:bg-[var(--heo-color-accent)] hover:text-[var(--heo-color-primary-text)] px-4 py-2 group-hover:px-2 group-hover:mx-1 group-hover:rounded bg-[var(--heo-color-card)]'>
-              <ChevronDoubleRight className={'w-4 h-4'} />
-            </div>
-          </div>
         </div>
 
         {/* 下一页 */}
