@@ -12,6 +12,10 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
  * @returns
  */
 export default function CustomContextMenu(props) {
+  const CUSTOM_RIGHT_CLICK_CONTEXT_MENU = siteConfig(
+    'CUSTOM_RIGHT_CLICK_CONTEXT_MENU',
+    false
+  )
   const [position, setPosition] = useState({ x: '0px', y: '0px' })
   const [show, setShow] = useState(false)
   const { isDarkMode, updateDarkMode, locale } = useGlobal()
@@ -41,6 +45,10 @@ export default function CustomContextMenu(props) {
   }, [router])
 
   useEffect(() => {
+    if (!CUSTOM_RIGHT_CLICK_CONTEXT_MENU) {
+      return
+    }
+
     const handleContextMenu = event => {
       event.preventDefault()
       // 计算点击位置加菜单宽高是否超出屏幕，如果超出则贴边弹出
@@ -160,6 +168,10 @@ export default function CustomContextMenu(props) {
   const CUSTOM_RIGHT_CLICK_CONTEXT_MENU_THEME_SWITCH = siteConfig(
     'CUSTOM_RIGHT_CLICK_CONTEXT_MENU_THEME_SWITCH'
   )
+  if (!CUSTOM_RIGHT_CLICK_CONTEXT_MENU) {
+    return null
+  }
+
   return (
     <div
       ref={menuRef}
