@@ -27,6 +27,10 @@ module.exports = {
     process.env.NEXT_PUBLIC_CODE_COLLAPSE_EXPAND_DEFAULT || true, // 折叠代码默认是展开状态
   CODE_COLLAPSE_MIN_LINES:
     process.env.NEXT_PUBLIC_CODE_COLLAPSE_MIN_LINES || 20, // 只有超过该行数的代码块才显示折叠条
+  // 代码预览侧栏与复制按钮文字（留空则根据系统语言自动匹配 en-US / vi-VN）
+  CODE_SIDEBAR_TEXT: process.env.NEXT_PUBLIC_CODE_SIDEBAR_TEXT || '',
+  CODE_COPY_TEXT: process.env.NEXT_PUBLIC_CODE_COPY_TEXT || '',
+  CODE_CLOSE_TEXT: process.env.NEXT_PUBLIC_CODE_CLOSE_TEXT || '',
   // Mermaid 图表CDN
   MERMAID_CDN:
     process.env.NEXT_PUBLIC_MERMAID_CDN ||

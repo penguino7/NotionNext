@@ -289,6 +289,49 @@ const requestFrame = callback => {
   return raf(callback)
 }
 
+const getCodeI18n = () => {
+  const lang = siteConfig('LANG') || 'en-US'
+  const isZh = lang === 'zh-CN' || lang === 'zh-TW' || lang === 'zh-HK'
+  const isVi = lang === 'vi-VN' || lang === 'vi'
+
+  if (isZh) {
+    return {
+      viewInSidebar: siteConfig('CODE_SIDEBAR_TEXT') || '在侧栏查看',
+      copy: siteConfig('CODE_COPY_TEXT') || '复制',
+      copied: '已复制',
+      copyFailed: '复制失败',
+      close: siteConfig('CODE_CLOSE_TEXT') || '关闭',
+      sidebarAria: '代码预览侧栏',
+      closeSidebarAria: '关闭代码预览侧栏',
+      viewInSidebarAria: label => `在侧栏查看 ${label}`
+    }
+  }
+
+  if (isVi) {
+    return {
+      viewInSidebar: siteConfig('CODE_SIDEBAR_TEXT') || 'Xem ở thanh bên',
+      copy: siteConfig('CODE_COPY_TEXT') || 'Sao chép',
+      copied: 'Đã sao chép',
+      copyFailed: 'Lỗi sao chép',
+      close: siteConfig('CODE_CLOSE_TEXT') || 'Đóng',
+      sidebarAria: 'Thanh xem trước mã',
+      closeSidebarAria: 'Đóng thanh xem trước mã',
+      viewInSidebarAria: label => `Xem ở thanh bên ${label}`
+    }
+  }
+
+  return {
+    viewInSidebar: siteConfig('CODE_SIDEBAR_TEXT') || 'View in sidebar',
+    copy: siteConfig('CODE_COPY_TEXT') || 'Copy',
+    copied: 'Copied',
+    copyFailed: 'Failed',
+    close: siteConfig('CODE_CLOSE_TEXT') || 'Close',
+    sidebarAria: 'Code preview sidebar',
+    closeSidebarAria: 'Close code preview sidebar',
+    viewInSidebarAria: label => `View ${label} in sidebar`
+  }
+}
+
 export const openCodeSidePanel = ({
   language = '',
   lineCount = 0,
@@ -300,6 +343,7 @@ export const openCodeSidePanel = ({
     return false
   }
 
+  const i18n = getCodeI18n()
   const returnFocus =
     document.activeElement instanceof HTMLElement
       ? document.activeElement
@@ -313,13 +357,13 @@ export const openCodeSidePanel = ({
   const backdrop = document.createElement('button')
   backdrop.type = 'button'
   backdrop.className = 'code-side-panel-backdrop'
-  backdrop.setAttribute('aria-label', '关闭代码预览侧栏')
+  backdrop.setAttribute('aria-label', i18n.closeSidebarAria)
   backdrop.addEventListener('click', closeCodeSidePanel)
 
   const drawer = document.createElement('aside')
   drawer.className = 'code-side-panel-drawer'
   drawer.setAttribute('role', 'dialog')
-  drawer.setAttribute('aria-label', '代码预览侧栏')
+  drawer.setAttribute('aria-label', i18n.sidebarAria)
   drawer.setAttribute('aria-modal', 'true')
 
   const header = document.createElement('div')
@@ -345,7 +389,7 @@ export const openCodeSidePanel = ({
   const copyButton = document.createElement('button')
   copyButton.type = 'button'
   copyButton.className = 'code-side-panel-copy'
-  copyButton.textContent = '复制'
+  copyButton.textContent = i18n.copy
   const copyCode = async () => {
     const originalText = copyButton.textContent
 
@@ -354,9 +398,9 @@ export const openCodeSidePanel = ({
         throw new Error('Clipboard unavailable')
       }
       await navigator.clipboard.writeText(text)
-      copyButton.textContent = '已复制'
+      copyButton.textContent = i18n.copied
     } catch {
-      copyButton.textContent = '复制失败'
+      copyButton.textContent = i18n.copyFailed
     }
 
     window.setTimeout(() => {
@@ -370,8 +414,8 @@ export const openCodeSidePanel = ({
   const closeButton = document.createElement('button')
   closeButton.type = 'button'
   closeButton.className = 'code-side-panel-close'
-  closeButton.setAttribute('aria-label', '关闭代码预览侧栏')
-  closeButton.textContent = '关闭'
+  closeButton.setAttribute('aria-label', i18n.closeSidebarAria)
+  closeButton.textContent = i18n.close
   closeButton.addEventListener('click', closeCodeSidePanel)
 
   actions.appendChild(copyButton)
@@ -452,11 +496,12 @@ export const openCodeSidePanel = ({
 const createCodeSidePanelButton = ({ language, label, lineCount, code }) => {
   if (!isCodeSidePanelSupported()) return null
 
+  const i18n = getCodeI18n()
   const button = document.createElement('button')
   button.type = 'button'
   button.className = 'collapse-side-panel-button'
-  button.textContent = '在侧栏查看'
-  button.setAttribute('aria-label', `在侧栏查看 ${label}`)
+  button.textContent = i18n.viewInSidebar
+  button.setAttribute('aria-label', i18n.viewInSidebarAria(label))
   button.addEventListener('click', event => {
     event.stopPropagation()
     openCodeSidePanel({
